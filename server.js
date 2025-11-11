@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 
-const database = require("./src/config/db")
+const database = require("./src/Config/db")
 
 database.on('open',()=>{
     app.listen(8080,()=>{
