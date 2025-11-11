@@ -1,16 +1,16 @@
-console.log("Hi Mate");
+const express = require('express')
+const app = express()
 
-const mongoose = require('mongoose')
+const database = require("./src/config/db")
 
-mongoose.connect('mongodb+srv://Marison:Marison@cluster0.5f3ypg5.mongodb.net/')
-.then(()=>{
-    console.log('DB Connected');
-    
+database.on('open',()=>{
+    app.listen(8080,()=>{
+console.log('Server is Running');
+
+    })
 })
 
-.catch(()=>{
-    console.log('Error Detected');
+database.on("error",()=>{
+    console.log('Error Whule running the server');
     
 })
-
-module.exports = mongoose.connection
