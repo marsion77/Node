@@ -1,7 +1,12 @@
 const express = require('express')
 const app = express()
+const userRouter = require("../Node/src/Router/UserRouter")
+
 
 const database = require("./src/Config/db")
+app.use("/user", userRouter)
+
+
 
 database.on('open',()=>{
     app.listen(8080,()=>{
