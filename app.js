@@ -16,6 +16,5 @@ console.log('Server is Running');
 })
 
 database.on("error",()=>{
-    console.log('Error Whule running the server');
-    
+    console.log('Error Whule running the server');  
 })
