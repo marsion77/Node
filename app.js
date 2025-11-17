@@ -4,6 +4,7 @@ const userRouter = require("./src/router/UserRouter")
 
 
 const database = require("./src/Config/db")
+
 app.use("/user", userRouter)
 
 
