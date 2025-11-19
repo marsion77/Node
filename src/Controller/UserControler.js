@@ -7,6 +7,12 @@ const createUser = async(req,res)=>{
     res.send(data)
  }
 
+ const getusers = async(req,res) =>{
+    const data = await UserService.getAllUser()
+    res.send(data)
+ }
+
  module.exports = {
- createUser
+ createUser,
+ getusers
 }
