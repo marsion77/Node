@@ -1,11 +1,15 @@
 const express = require('express')
 const app = express()
-
-const userRouter = require("./src/router/UserRouter")
 const database = require("./src/Config/db")
 
 app.use(express.json())
+
+const userRouter = require("./src/router/UserRouter")
+const productRouter = require("./src/Router/ProductRouter")
+
+
 app.use("/user", userRouter)
+app.use("/products",productRouter)
 
 
 
