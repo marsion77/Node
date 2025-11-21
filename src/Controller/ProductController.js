@@ -12,8 +12,11 @@ const getProduct = async(req,res)=>{
   res.send(productdata)
 }
 
+
+
 module.exports = {
   createProduct,
-  getProduct
+  getProduct,
+
 
 }

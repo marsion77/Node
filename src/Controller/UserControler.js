@@ -12,7 +12,14 @@ const createUser = async(req,res)=>{
     res.send(data)
  }
 
+
+ const getUserById = async(req,res)=>{
+const data = await UserService.specificUser(req.params)
+res.send(data)
+}
+
  module.exports = {
- createUser,
- getusers
+ createUser, 
+ getusers,
+ getUserById
 }

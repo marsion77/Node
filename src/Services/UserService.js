@@ -1,5 +1,6 @@
 const userModel = require("../Model/UserModel")
-const body = require("../Controller/UserControler")
+const body = require("../Controller/UserControler");
+const { default: mongoose } = require("mongoose");
 
 
 const createUserdata = async(body)=>{
@@ -19,7 +20,20 @@ const getAllUser = async()=>{
 }
 
 
+
+const specificUser = async(userId)=>{
+
+const getId = await userModel.findById(new mongoose.Types.ObjectId(userId))
+    return getId
+}
+
+
+
+
+
+
 module.exports = {
     createUserdata,
-    getAllUser
+    getAllUser,
+    specificUser
 }
