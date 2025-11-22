@@ -4,12 +4,7 @@ const { default: mongoose } = require("mongoose");
 
 
 const createUserdata = async(body)=>{
-    console.log(body,"service");
-    
-    console.log("Service is Working");
-    // return 'Service'
     const userData = await userModel.create(body)
-    
     return userData
 
 }
@@ -22,7 +17,6 @@ const getAllUser = async()=>{
 
 
 const specificUser = async(userId)=>{
-
 const getId = await userModel.findById(new mongoose.Types.ObjectId(userId))
     return getId
 }
