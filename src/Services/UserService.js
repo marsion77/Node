@@ -23,9 +23,6 @@ const getId = await userModel.findById(new mongoose.Types.ObjectId(userId))
 
 
 
-
-
-
 module.exports = {
     createUserdata,
     getAllUser,
