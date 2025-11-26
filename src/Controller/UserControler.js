@@ -1,7 +1,5 @@
 const UserService = require('../Services/UserService')
 
-
-
 const createUser = async(req,res)=>{
     const data = await UserService.createUserdata(req.body)
 
