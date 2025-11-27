@@ -44,10 +44,23 @@ const deleteUser = async (userId) => {
 };
 
 
+// delete data
+const deleteUserData = async(id)=>{
+    console.log(id,"idddd");
+
+    const checkUser = await userModel.findById(new mongoose.Types.ObjectId(id))
+    console.log(checkUser,"checkUser");
+    if(!checkUser){
+        console.log("user not found");
+    }
+    const deleteData = await userModel.findByIdAndDelete(new mongoose.Types.ObjectId(id))
+    return deleteData
+}
 module.exports = {
     createUserdata,
     getAllUser,
     specificUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    deleteUserData
 }
