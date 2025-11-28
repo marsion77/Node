@@ -59,11 +59,20 @@ const deleteUserData = async(req,res)=>{
     res.send(data)
 
 }
+
+
+const putdata = async(req,res)=>{
+    const data = await UserService.putuserdata(req.params.id,req.body);
+    res.send(data)
+}
+
+
  module.exports = {
  createUser, 
  getusers,
  getUserById,
  updateUserById,
  deleteUserById,
- deleteUserData
+ deleteUserData,
+ putdata
 }

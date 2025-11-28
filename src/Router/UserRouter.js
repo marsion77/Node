@@ -30,4 +30,7 @@ router.delete("/delete/user/:id", userController.deleteUserById);
 router.delete("/delete/userdata/:id",userController.deleteUserData)
 
 
+
+router.put("/put/user/:id",userController.putdata)
+
 module.exports = router 
