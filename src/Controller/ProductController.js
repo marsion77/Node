@@ -19,11 +19,17 @@ const getProductbyId = async(req,res)=>{
   res.send(data)
 }
 
+const updateproduct = async(req,res)=>{
+  const data = await ProductService.updateProductById(req.params.id,req.body)
+  res.send(data)
+}
+
 module.exports = {
   createProduct,
   getProduct,
 
-  getProductbyId
+  getProductbyId,
+  updateproduct
 
 
 }

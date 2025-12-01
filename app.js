@@ -12,9 +12,6 @@ app.use("/user", userRouter)
 app.use("/products",productRouter)
 
 
-
-
-
 database.on('open',()=>{
     app.listen(8080,()=>{
 console.log('Server is Running');

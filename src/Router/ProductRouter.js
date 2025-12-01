@@ -9,5 +9,7 @@ router.get("/getproduct",ProductController.getProduct)
 
 router.get("getproduct/:id",ProductController.getProductbyId)
 
+router.put("put/product/:id",ProductController.updateproduct)
 
-module.exports = router 
+
+module.exports = router   
