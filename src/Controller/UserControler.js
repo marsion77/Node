@@ -60,11 +60,30 @@ const deleteUserData = async(req,res)=>{
 
 }
 
-
+// Put User
 const putdata = async(req,res)=>{
     const data = await UserService.putuserdata(req.params.id,req.body);
     res.send(data)
 }
+
+
+// Login User
+const loginUser = async (req, res) => {
+    const { email, password } = req.body;
+    console.log("Incoming payload:", email, password);
+
+
+    const user = await UserService.loginCheck(email, password);
+
+    if (!user) {
+        console.log("❌ No match found – invalid credentials");
+        return res.status(404).send({ message: "Invalid credentials" });
+    }
+
+    console.log("✅ Login successful:", user.name);
+    res.send({ message: "Login success", user });
+};
+
 
 
  module.exports = {
@@ -74,5 +93,6 @@ const putdata = async(req,res)=>{
  updateUserById,
  deleteUserById,
  deleteUserData,
- putdata
+ putdata,
+ loginUser
 }

@@ -29,8 +29,11 @@ router.delete("/delete/user/:id", userController.deleteUserById);
 // DELETE USER
 router.delete("/delete/userdata/:id",userController.deleteUserData)
 
-
-
+// Route to update by ID
 router.put("/put/user/:id",userController.putdata)
+
+// Route to Login
+router.post("/login", userController.loginUser);
+
 
 module.exports = router 

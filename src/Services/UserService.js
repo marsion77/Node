@@ -72,6 +72,19 @@ const putuserdata = async(id,updatebody)=>{
 }
 
 
+// Login Function
+const loginCheck = async (email, password) => {
+    const user = await userModel.findOne({ email: email });
+
+    if (!user) return null;
+
+    // simple plain-text comparison (upgrade to bcrypt later)
+    if (user.password !== password) return null;
+
+    return user;
+};
+
+
 
 
 module.exports = {
@@ -81,5 +94,6 @@ module.exports = {
     updateUser,
     deleteUser,
     deleteUserData,
-    putuserdata
+    putuserdata,
+    loginCheck
 }
