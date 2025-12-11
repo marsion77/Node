@@ -6,10 +6,12 @@ app.use(express.json())
 
 const userRouter = require("./src/router/UserRouter")
 const productRouter = require("./src/Router/ProductRouter")
+const wishlistRoute = require("./src/Router/wishlistRoute")
 
 
 app.use("/user", userRouter)
 app.use("/products",productRouter)
+app.use("/wishlist",wishlistRoute)
 
 
 database.on('open',()=>{

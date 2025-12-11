@@ -35,5 +35,17 @@ router.put("/put/user/:id",userController.putdata)
 // Route to Login
 router.post("/login", userController.loginUser);
 
+// forgot password
+router.post("/forgot-password",userController.forgotPassword)
+
+
+// Verify OTP
+router.post("/verify-otp", userController.verifyOtp);
+
+
+// Login
+router.post("/userlogin",userController.userLogin)
+
+
 
 module.exports = router 

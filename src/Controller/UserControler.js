@@ -84,6 +84,33 @@ const loginUser = async (req, res) => {
     res.send({ message: "Login success", user });
 };
 
+// Forgot Password
+const forgotPassword = async(req,res)=>{
+    const data = await UserService.forgotpasswordData(req.body)
+    res.send(data)
+}
+
+
+// Verify OTP
+const verifyOtp = async (req, res) => {
+    try {
+        const data = await UserService.verifyOtpData(req.body);
+        res.send(data);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: "Internal server error" });
+    }
+};
+
+
+// Login
+
+const userLogin = async(req,res)=>{
+      const data = await UserService.userloginData(req.body)
+      res.send(data)
+}
+
 
 
  module.exports = {
@@ -94,5 +121,8 @@ const loginUser = async (req, res) => {
  deleteUserById,
  deleteUserData,
  putdata,
- loginUser
+ loginUser,
+ forgotPassword,
+ verifyOtp,
+ userLogin
 }

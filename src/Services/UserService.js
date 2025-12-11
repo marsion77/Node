@@ -1,5 +1,10 @@
+const sendEmail = require("../../utils/mailer");
+const CredentialModel = require("../Model/credentialModel");
 const userModel = require("../Model/UserModel")
 const { default: mongoose } = require("mongoose");
+const crypto = require("crypto")
+const jwt = require("jsonwebtoken")
+
 
 
 
@@ -7,7 +12,6 @@ const { default: mongoose } = require("mongoose");
 const createUserdata = async(body)=>{
     const userData = await userModel.create(body)
     return userData
-
 }
 
 
@@ -58,7 +62,7 @@ const deleteUserData = async(id)=>{
 
 
 
-
+// Put Function
 const putuserdata = async(id,updatebody)=>{
     const checks = await userModel.findById(new mongoose.Types.ObjectId(id))
 
@@ -84,7 +88,96 @@ const loginCheck = async (email, password) => {
     return user;
 };
 
+// Password-Generating function
+const forgotpasswordData = async (body) => {
+    console.log(body);
 
+    const checkUser = await userModel.findOne({ email: body.email });
+    console.log(checkUser);
+
+    if (!checkUser) {
+        return { message: "user not found" };
+    }
+
+    // Generate 6-digit OTP
+    const otp = Math.floor(100000 + Math.random() * 900000);
+
+    // Send OTP to user
+    await sendEmail(body.email, otp);
+
+    // Create or Update existing OTP
+    await CredentialModel.findOneAndUpdate(
+        { email: body.email },            // find
+        { OTP: otp, date: new Date(),
+        expiresAt: new Date(Date.now() + 300000)  
+
+         },   // update data
+        { upsert: true, new: true }     
+    );
+
+    return {
+        message: "OTP generated & stored successfully",
+        success: true
+    };
+};
+
+
+// Verify OTP
+const verifyOtpData = async (body) => {
+    console.log(body.email);
+    
+    const { email, otp } = body;
+
+    // Step 1: Check OTP record exists
+    const otpRecord = await CredentialModel.findOne({"email": body.email });
+    console.log(otpRecord);
+    
+
+    if (!otpRecord) {
+        return { success: false, message: "OTP not found. Please request a new one." };
+    }
+
+    // Step 2: Check expiration
+    if (new Date() > otpRecord.expiresAt) {
+        return { success: false, message: "OTP expired. Please request a new one." };
+    }
+
+    // Step 3: Match OTP
+    if (otpRecord.OTP != otp) {
+        return { success: false, message: "Invalid OTP. Please try again." };
+    }
+
+    // Optional: Delete OTP after successful validation
+    // await CredentialModel.deleteOne({ email });
+
+    return {
+        success: true,
+        message: "OTP verified successfully"
+    };
+};
+
+
+const userloginData = async(body)=>{
+
+    const userdata = await userModel.findOne({"email":body.email})
+    if(!userdata){
+        return { status: false, message: "User not found" };
+    }
+
+    const jwt_code = crypto.randomBytes(64).toString("hex");
+   console.log(jwt_code,"JWT_SECRET");
+
+    const token = jwt.sign({payload:userdata},jwt_code,{ expiresIn: "1d" })
+
+    return{
+        status: true,
+        message: "Login Successful",
+        Token: token
+    }
+
+
+
+}
 
 
 module.exports = {
@@ -95,5 +188,8 @@ module.exports = {
     deleteUser,
     deleteUserData,
     putuserdata,
-    loginCheck
+    loginCheck,
+    forgotpasswordData,
+    verifyOtpData,
+    userloginData
 }
