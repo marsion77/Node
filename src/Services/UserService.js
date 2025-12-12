@@ -127,6 +127,8 @@ const verifyOtpData = async (body) => {
     console.log(body.email);
     
     const { email, otp } = body;
+    console.log(email);
+    
 
     // Step 1: Check OTP record exists
     const otpRecord = await CredentialModel.findOne({"email": body.email });
@@ -179,7 +181,18 @@ const userloginData = async(body)=>{
 
 }
 
-
+const orderedItems = [
+    {
+        itemId: "item 1",
+        quantity: 100,
+        price: 80
+    },
+    {
+        itemId: "item 2",
+        quantity: 50,
+        price: 30
+    }
+]
 module.exports = {
     createUserdata,
     getAllUser,
