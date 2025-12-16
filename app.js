@@ -10,8 +10,12 @@ const wishlistRoute = require("./src/Router/wishlistRoute")
 
 
 app.use("/user", userRouter)
+
+
 app.use("/products",productRouter)
 app.use("/wishlist",wishlistRoute)
+
+
 
 
 database.on('open',()=>{
